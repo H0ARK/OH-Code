@@ -423,6 +423,7 @@ class StandaloneConversationManager(ConversationManager):
     async def _update_conversation_for_event(
         self, user_id: str, github_user_id: str, conversation_id: str, event=None
     ):
+<<<<<<< HEAD
         try:
             conversation_store = await self._get_conversation_store(user_id, github_user_id)
 
@@ -457,6 +458,30 @@ class StandaloneConversationManager(ConversationManager):
         except Exception as e:
             logger.error(f'Error during conversation metadata update for {conversation_id}: {e}',
                          extra={'session_id': conversation_id})
+=======
+        conversation_store = await self._get_conversation_store(user_id, github_user_id)
+        conversation = await conversation_store.get_metadata(conversation_id)
+        conversation.last_updated_at = datetime.now(timezone.utc)
+
+        # Update cost/token metrics if event has llm_metrics
+        if event and hasattr(event, 'llm_metrics') and event.llm_metrics:
+            metrics = event.llm_metrics
+
+            # Update accumulated cost
+            if hasattr(metrics, 'accumulated_cost'):
+                conversation.accumulated_cost = metrics.accumulated_cost
+
+            # Update token usage
+            if hasattr(metrics, 'accumulated_token_usage'):
+                token_usage = metrics.accumulated_token_usage
+                conversation.prompt_tokens = token_usage.prompt_tokens
+                conversation.completion_tokens = token_usage.completion_tokens
+                conversation.total_tokens = (
+                    token_usage.prompt_tokens + token_usage.completion_tokens
+                )
+
+        await conversation_store.save_metadata(conversation)
+>>>>>>> upstream/main
 
 
 def _last_updated_at_key(conversation: ConversationMetadata) -> float:

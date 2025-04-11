@@ -203,7 +203,12 @@ class EventStream(EventStore):
             event_id = event.id # Get ID for logging/writing
         logger.debug(f'Assigning event ID {event_id} ({type(event).__name__}) from {source.name}')
         event._timestamp = datetime.now().isoformat()
+<<<<<<< HEAD
         event._source = source
+=======
+        event._source = source  # type: ignore [attr-defined]
+        logger.debug(f'Event to add: {event}')
+>>>>>>> upstream/main
         data = event_to_dict(event)
         data = self._replace_secrets(data)
 
