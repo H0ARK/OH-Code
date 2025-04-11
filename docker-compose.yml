@@ -1,3 +1,5 @@
+version: "3"
+
 services:
   openhands:
     build:
@@ -14,20 +16,25 @@ services:
       - POETRY_VIRTUALENVS_CREATE=false # Optional: Prevent poetry from creating venvs inside container if source is mounted
     ports:
       - "3000:3000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./workspace:/opt/workspace_base
+    depends_on:
+      - neovim-runtime-builder
+    networks:
+      - openhands-network
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    volumes:
-      # Mount specific source code directories for live reloading
-      # Ensure paths inside the container match where the code runs (likely under /app)
-      - ./openhands:/app/openhands:rw
-      - ./microagents:/app/microagents:rw # Add if developing microagents
-      # Keep existing necessary volumes
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ~/.openhands-state:/.openhands-state
-      - ${WORKSPACE_BASE:-$PWD/workspace}:/opt/workspace_base
-    pull_policy: build
-    # Override the default command to run uvicorn with reload
-    # Adjust the path 'openhands.server.listen:app' if necessary
-    command: ["uvicorn", "openhands.server.listen:app", "--host", "0.0.0.0", "--port", "3000", "--reload"]
-    stdin_open: true
-    tty: true
+
+  neovim-runtime-builder:
+    build:
+      context: ./neovim-runtime
+      dockerfile: Dockerfile
+    image: neovim-runtime
+    command: "echo 'Neovim runtime image built successfully'"
+    networks:
+      - openhands-network
+
+networks:
+  openhands-network:
+    driver: bridge

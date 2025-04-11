@@ -1,0 +1,5 @@
+# Override configuration for VIM microagent development
+services:
+  openhands:
+    environment:
+      - SANDBOX_RUNTIME_CONTAINER_IMAGE=docker.all-hands.dev/all-hands-ai/runtime-neovim:0.12

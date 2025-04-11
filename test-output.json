@@ -1,0 +1,153 @@
+{
+  "km": {
+    "key_map": "km",
+    "files": "f",
+    "functions": "fn",
+    "classes": "c",
+    "relationships": "r",
+    "project": "pj",
+    "name": "n",
+    "language": "l",
+    "summary": "s",
+    "token_count": "tc",
+    "imports": "i",
+    "file_name": "fn",
+    "description": "d",
+    "parameters": "p",
+    "return_type": "rt",
+    "inherits_from": "if",
+    "complexity": "cx",
+    "line_metrics": "lm",
+    "variable_metrics": "vm",
+    "calls": "ca",
+    "enhanced_summary": "es",
+    "total_lines": "tl",
+    "code_lines": "cl",
+    "comment_lines": "cml",
+    "docstring_lines": "dl",
+    "blank_lines": "bl",
+    "total_variables": "tv",
+    "most_used_variables": "muv",
+    "variable_usage_count": "vuc",
+    "source_id": "sid",
+    "target_id": "tid",
+    "relationship_type": "rt"
+  },
+  "f": [
+    {
+      "n": "main.py",
+      "l": "python",
+      "s": "File 'main.py'. Imports: os, module_a",
+      "d": "File 'main.py'. Imports: os, module_a",
+      "tc": 105,
+      "i": ["os", "module_a"]
+    },
+    {
+      "n": "module_a.py",
+      "l": "python",
+      "s": "File 'module_a.py'",
+      "d": "File 'module_a.py'",
+      "tc": 108,
+      "i": []
+    },
+    {
+      "n": "module_b.py",
+      "l": "python",
+      "s": "File 'module_b.py'. Imports: .module_a",
+      "d": "File 'module_b.py'. Imports: .module_a",
+      "tc": 146,
+      "i": [".module_a"]
+    }
+  ],
+  "fn": [
+    {
+      "fn": "main.py",
+      "n": "main_func",
+      "s": "",
+      "d": "",
+      "p": [],
+      "rt": "",
+      "ca": ["func_b1", "func_b2", "func_a1"],
+      "cx": 1,
+      "lm": { "tl": 8, "cl": 7, "cml": 0, "dl": 0, "bl": 1 },
+      "vm": { "tv": 0, "muv": [], "vuc": {} }
+    },
+    {
+      "fn": "module_a.py",
+      "n": "__init__",
+      "s": "Multiplies the instance variable.",
+      "d": "Multiplies the instance variable.",
+      "p": [{ "name": "value", "type": "int" }],
+      "rt": "float",
+      "ca": ["method_a1"],
+      "cx": 1,
+      "lm": { "tl": 7, "cl": 2, "cml": 0, "dl": 3, "bl": 2 },
+      "vm": { "tv": 0, "muv": [], "vuc": {} }
+    },
+    {
+      "fn": "module_a.py",
+      "n": "func_a1",
+      "s": "A simple function in module A.",
+      "d": "A simple function in module A.",
+      "p": [{ "name": "name", "type": "str" }],
+      "rt": "",
+      "cx": 1,
+      "lm": { "tl": 3, "cl": 1, "cml": 0, "dl": 2, "bl": 0 },
+      "vm": { "tv": 0, "muv": [], "vuc": {} }
+    },
+    {
+      "fn": "module_b.py",
+      "n": "func_b1",
+      "s": "Uses ClassA from module_a.",
+      "d": "Uses ClassA from module_a.",
+      "p": [],
+      "rt": "",
+      "ca": ["method_a1", "ClassA"],
+      "cx": 1,
+      "lm": { "tl": 6, "cl": 0, "cml": 0, "dl": 5, "bl": 1 },
+      "vm": { "tv": 0, "muv": [], "vuc": {} }
+    },
+    {
+      "fn": "module_b.py",
+      "n": "func_b2",
+      "s": "A function with parameters and return type hint.",
+      "d": "A function with parameters and return type hint.",
+      "p": [
+        { "name": "x", "type": "int" },
+        { "name": "y", "type": "str = \"default\"" }
+      ],
+      "rt": "tuple[int, str]",
+      "ca": ["upper", "func_a1"],
+      "cx": 1,
+      "lm": { "tl": 5, "cl": 1, "cml": 0, "dl": 4, "bl": 0 },
+      "vm": { "tv": 0, "muv": [], "vuc": {} }
+    }
+  ],
+  "c": [
+    {
+      "fn": "module_a.py",
+      "n": "ClassA",
+      "s": "A simple test class.",
+      "d": "A simple test class.",
+      "if": []
+    }
+  ],
+  "r": [
+    { "sid": 0, "tid": 2, "rt": "imports" },
+    { "sid": 1, "tid": 0, "rt": "defined_in" },
+    { "sid": 1, "tid": 7, "rt": "calls" },
+    { "sid": 1, "tid": 8, "rt": "calls" },
+    { "sid": 1, "tid": 5, "rt": "calls" },
+    { "sid": 3, "tid": 2, "rt": "defined_in" },
+    { "sid": 4, "tid": 2, "rt": "defined_in" },
+    { "sid": 5, "tid": 2, "rt": "defined_in" },
+    { "sid": 7, "tid": 6, "rt": "defined_in" },
+    { "sid": 8, "tid": 6, "rt": "defined_in" },
+    { "sid": 8, "tid": 5, "rt": "calls" }
+  ],
+  "pj": {
+    "n": "project_summary",
+    "s": "Project summary",
+    "d": "A software project with mixed or specialized technologies."
+  }
+}

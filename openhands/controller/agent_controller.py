@@ -507,10 +507,10 @@ class AgentController:
         """Resets the agent controller state."""
         self.log('info', 'Resetting agent controller.')
         self.agent.reset()
-        self._stuck_detector.reset()
         self._pending_action = None
         await self.event_stream.add_event(
-            ErrorObservation('Agent Controller Reset'), event_source=EventSource.AGENT
+            ErrorObservation('Agent Controller Reset'),
+            EventSource.AGENT
         )
 
     async def set_agent_state_to(self, new_state: AgentState) -> None:

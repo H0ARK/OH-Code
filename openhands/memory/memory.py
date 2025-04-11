@@ -94,7 +94,7 @@ class Memory:
                     # important: this will release the execution flow from waiting for the retrieval to complete
                     workspace_obs._cause = event.id  # type: ignore[union-attr]
 
-                    self.event_stream.add_event(workspace_obs, EventSource.ENVIRONMENT)
+                    await self.event_stream.add_event(workspace_obs, EventSource.ENVIRONMENT)
                     return
 
                 # Handle knowledge recall (triggered microagents)
@@ -114,7 +114,7 @@ class Memory:
                     # important: this will release the execution flow from waiting for the retrieval to complete
                     microagent_obs._cause = event.id  # type: ignore[union-attr]
 
-                    self.event_stream.add_event(microagent_obs, EventSource.ENVIRONMENT)
+                    await self.event_stream.add_event(microagent_obs, EventSource.ENVIRONMENT)
                     return
         except Exception as e:
             error_str = f'Error: {str(e.__class__.__name__)}'
